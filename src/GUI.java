@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class GUI extends JFrame {
 
     private static final int HEIGHT = 500;
@@ -14,10 +15,13 @@ public class GUI extends JFrame {
     private JComboBox<Integer> restTime;
     private Integer[] options = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10};
     private JLabel timeLeftLabel;
-    private String timeLeft;
+    private int timeLeft;
     private JButton startButton;
 
     private JLabel welcomeLabel;
+    private JLabel sets;
+    private JLabel timeHang;
+    private JLabel rest;
 
 
     public GUI (){
@@ -30,19 +34,19 @@ public class GUI extends JFrame {
                 " 3 second delay to give you time to get ready.");
         add(welcomeLabel);
 
-        setUpJComboBox();
+        setUpTimerSetup();
         setUpStartButton();
-        setUpTimeLeft();
+//        setUpTimeLeft();
         setVisible(true);
 
 
     }
 
-    private void setUpTimeLeft() {
-        timeLeftLabel = new JLabel(timeLeft);
-        add(timeLeftLabel);
-
-    }
+//    private void setUpTimeLeft() {
+//        timeLeftLabel = new JLabel("Time Left:" + timeLeft);
+//        add(timeLeftLabel);
+//
+//    }
 
     private void setUpStartButton() {
         startButton = new JButton("Start");
@@ -55,16 +59,23 @@ public class GUI extends JFrame {
                     restTime.getSelectedIndex() + 1);
 
                 timer.countDown();
+                timeLeft=timeOnHang.getSelectedIndex() + 1;
             }
         });
     }
 
-    private void setUpJComboBox() {
+    private void setUpTimerSetup() {
         repetitions = new JComboBox<>(options);
         timeOnHang = new JComboBox<>(options);
         restTime = new JComboBox<>(options);
+        sets = new JLabel("Sets");
+        add(sets);
         add(repetitions);
+        timeHang = new JLabel("Time Hanging");
+        add(timeHang);
         add(timeOnHang);
+        rest = new JLabel("Rest Time");
+        add(rest);
         add(restTime);
 
     }
